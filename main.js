@@ -1,25 +1,26 @@
 #!/usr/bin/env node
-var argv = require('optimist')
+"use strict";
+const _ = require('lodash');
+const rest = require('restler');
+const argv = require('optimist')
     .default('interval', 1000)
     .argv;
-var HueApi = require("node-hue-api").HueApi;
 
-var api = new HueApi(argv.host, argv.username);
+let baseUrl = `http://${argv.host}/api/${argv.username}`
+let currentStates = {};
 
 
-var displayResult = function(result) {
-  console.log(JSON.stringify(result, null, 2));
-};
+rest.get(baseUrl + '/lights').on('complete', result => {
+  if (result instanceof Error) {
+    console.log('Error:', result.message);
+  } else {
+    let newStates = _.mapValues(result, v => v.state);
+    //let newStates = _.map(result, (v, k) => { return { name : k, state: v.state } });
+    console.log(newStates);
+  }
+});
 
-// show bridge config
-//api.config().then(displayResult).done();
-
-// get small light state
-//api.lights()
-//    .then(displayResult)
-//    .done();
-
-// TODO avoid overloading the bridge, so thinking of something different then interval ( setTimeout after done )
-setInterval(function() {
-  api.fullState().then(displayResult).done();
-}, argv.interval);
+// TODO avoid overloading the bridge, so thinking of something different then interval ( setTimeout on done )
+// setInterval(function() {
+//   api.fullState().then(displayResult).done();
+// }, argv.interval);

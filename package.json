@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/damsonn/hue-state#readme",
   "dependencies": {
-    "node-hue-api": "^1.1.2",
-    "optimist": "^0.6.1"
+    "lodash": "^3.10.1",
+    "optimist": "^0.6.1",
+    "restler": "^3.3.0"
   }
 }
