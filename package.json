@@ -1,0 +1,30 @@
+{
+  "name": "hue-state",
+  "version": "1.0.0",
+  "description": "Small cylon robot to manage state of your hue ligths after power off",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damsonn/hue-state.git"
+  },
+  "keywords": [
+    "philips",
+    "hue",
+    "cylon",
+    "js",
+    "node"
+  ],
+  "author": "Damien Dormal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/damsonn/hue-state/issues"
+  },
+  "homepage": "https://github.com/damsonn/hue-state#readme",
+  "dependencies": {
+    "node-hue-api": "^1.1.2",
+    "optimist": "^0.6.1"
+  }
+}
