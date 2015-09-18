@@ -4,8 +4,10 @@ const _ = require('lodash');
 const util = require('util');
 const rest = require('restler');
 const argv = require('optimist')
-    .default('interval', 2000)
-    .argv;
+        .default('interval', 2000)
+        .usage('Store your hue lights state and restore them after power off\nUsage: $0 --host [string] --username [string]')
+        .demand(['host','username'])
+        .argv;
 
 let baseUrl = `http://${argv.host}/api/${argv.username}`
 let prevStates = {};
@@ -20,7 +22,7 @@ function resetLamp(lampName, state) {
   });
 };
 
-setInterval(() => {
+function checkStates() {
   rest.get(baseUrl + '/lights').on('complete', result => {
     if (result instanceof Error) {
       util.log('Error:', result.message);
@@ -36,4 +38,7 @@ setInterval(() => {
       prevStates = states;
     }
   });
-}, argv.interval);
+};
+
+util.log('started hue state deamon');
+setInterval(checkStates, argv.interval);
