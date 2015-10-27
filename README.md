@@ -26,3 +26,12 @@ or even better using [forever](https://github.com/foreverjs/forever)
 ```
 forever start main.js --host=BRIDGE_IP --username=USERNAME
 ```
+
+### Docker
+```
+# build the container
+docker build -t hue-state .
+
+# run in a new container
+docker run --restart always --name hue-state -d hue-state node main.js --host=BRIDGE_IP --username=USERNAME
+```
