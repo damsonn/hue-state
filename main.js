@@ -15,7 +15,7 @@ let prevStates = {};
 function resetLamp(lampName, state) {
   util.log(`going to reset lamp ${lampName}`);
   // only pick the brithness and hue if present in state
-  let updatePayload = _.pick(state, ['bri', 'hue']);
+  let updatePayload = _.pick(state, ['bri', 'hue', 'sat']);
   util.log(updatePayload);
   rest.putJson(`${baseUrl}/lights/${lampName}/state`, updatePayload).on('complete', (data, response) => {
     // TODO handle failure
